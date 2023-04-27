@@ -1,16 +1,12 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var CardCollection = /** @class */ (function () {
-    function CardCollection(maxCardCount, cards) {
+export default class CardCollection {
+    constructor(maxCardCount, cards) {
         this.cards = [];
         this.maxCardCount = maxCardCount;
     }
-    CardCollection.prototype.getCardCount = function () {
+    getCardCount() {
         return this.cards.length;
-    };
-    CardCollection.prototype.getMaxCardCount = function () {
+    }
+    getMaxCardCount() {
         return this.maxCardCount;
-    };
-    return CardCollection;
-}());
-exports.default = CardCollection;
+    }
+}
