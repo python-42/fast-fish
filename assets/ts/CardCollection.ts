@@ -26,4 +26,13 @@ export default abstract class CardCollection {
         return this.maxCardCount;
     }
 
+    public inCollection(card : Card) : boolean {
+        for(let i = 0; i < this.cards.length; i++){
+            if(this.cards[i] === card){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
