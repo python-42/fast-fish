@@ -1,5 +1,7 @@
-import CardCollection from "./CardCollection";
-export default class Hand extends CardCollection {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const CardCollection_1 = require("./CardCollection");
+class Hand extends CardCollection_1.default {
     constructor() {
         let cards = [];
         super(52, cards);
@@ -13,3 +15,4 @@ export default class Hand extends CardCollection {
     }
     passCard(card, target) { }
 }
+exports.default = Hand;
