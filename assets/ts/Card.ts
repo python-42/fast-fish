@@ -1,8 +1,8 @@
 export default class Card {
     private readonly suit : Suit;
-    private readonly rank : number;
+    private readonly rank : Rank;
     
-    public constructor (suit : Suit, rank : number) {
+    public constructor (suit : Suit, rank : Rank) {
         this.suit = suit;
         this.rank = rank;
     }
@@ -11,17 +11,36 @@ export default class Card {
         return this.suit;
     }
 
-    public getRank() : number {
+    public getRank() : Rank {
         return this.rank;
+    }
+
+    public toString() : String {
+        return this.rank + " of " + this.suit;       
     }
 
 }
 
 //alphabetical order
 export const enum Suit {
-    Clubs = 0,
-    Diamonds = 1,
-    Hearts = 2,
-    Spades = 3 
-    
+    Clubs = "Clubs",
+    Diamonds = "Diamonds",
+    Hearts = "Hearts",
+    Spades = "Spades" 
+}
+
+export enum Rank {
+    Ace = "Ace",
+    Two = "Two",
+    Three = "Three",
+    Four = "Four",
+    Five = "Five",
+    Six = "Six",
+    Seven = "Seven", 
+    Eight = "Eight",
+    Nine = "Nine",
+    Ten = "Ten",
+    Jack = "Jack",
+    Queen = "Queen",
+    King = "King"
 }
