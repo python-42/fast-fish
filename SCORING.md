@@ -1,5 +1,5 @@
 ---
-title: Introduction to Programming Final Project
+Introduction to Programming Final Project
 ---
 
 ```mermaid
