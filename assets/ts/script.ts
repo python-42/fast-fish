@@ -1,7 +1,5 @@
 import Card, { Rank, Suit } from "./Card";
+import Deck from "./Deck";
+import Hand from "./Hand";
 
-let c = new Card(Suit.Diamonds, Rank.Ace);
-let c2 = new Card(Suit.Spades, Rank.Queen);
-
-console.log("" + c);
-console.log("" + c2);
+let h : Hand = new Hand();
