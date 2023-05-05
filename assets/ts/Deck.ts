@@ -1,28 +1,35 @@
 import CardCollection from "./CardCollection";
-import Card from "./Card"
+import Card, { Rank, Suit } from "./Card"
 
 export default class Deck extends CardCollection {
     
     public constructor () {
         let cards : Card[] = [];
         super(52, cards);
+
+        this.cards = this.getFullDeck();
+        this.shuffle();
     }
 
-
-    public override addCard(card : Card) : void {
-        
+    private getFullDeck() : Card[] {
+        let rtn : Card[] = [];
+        let suits : Suit[] = [Suit.Clubs, Suit.Diamonds, Suit.Hearts, Suit.Spades];
+        for (let i = 0; i < 4; i++) {
+            for (let ii = 0; ii < 13; ii++) {
+                rtn.push(new Card(suits[i], ii));
+            }
+        }
+        return rtn;
     }
 
-    public override mergeCollections(cards : CardCollection) : void {
-
+    public shuffle() : void {
+        let a : Card[] = this.cards;
+        this.cards = [];
+        let index : number = 0;
+        while (a.length > 0) {
+            index = Math.floor(Math.random() * a.length - 1)
+            this.cards.push(a.splice(index, 1)[0]);
+        }
     }
-
-    public override addCards(cards : Card[]) : void {}
-
-    public override removeCard(Card : Card) : Card {
-        return this.cards[0];
-    }
-
-    public override passCard(card : Card, target : CardCollection) : void {}
 
 }

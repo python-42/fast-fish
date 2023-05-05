@@ -1,3 +1,5 @@
-import { getFullDeck } from "./Utils"
+import Card, { Rank, Suit } from "./Card";
+import Deck from "./Deck";
+import Hand from "./Hand";
 
-console.log(getFullDeck())
+let h : Hand = new Hand();
