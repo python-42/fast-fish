@@ -9,43 +9,12 @@ class Deck extends CardCollection_1.default {
         this.cards = this.getFullDeck();
         this.shuffle();
     }
-    addCard(card) {
-        if (this.inCardCollection(card) || this.maxCardCount === this.getCardCount()) {
-            return;
-        }
-        this.cards.push(card);
-    }
-    mergeCollections(cards) {
-    }
-    addCards(newCards) {
-        for (let i = 0; i < newCards.length; i++) {
-            if (!this.inCardCollection(newCards[i])) {
-                this.cards.push(newCards[i]);
-            }
-        }
-    }
-    removeCard(card) {
-        for (let i = 0; i < this.cards.length; i++) {
-            if (this.cards[i] === card) {
-                this.cards.splice(i, 1);
-                return card;
-            }
-        }
-        return null;
-    }
-    passCard(card, target) {
-        if (!this.inCardCollection(card)) {
-            return;
-        }
-        target.addCard(card);
-        this.removeCard(card);
-    }
     getFullDeck() {
         let rtn = [];
-        let suits = ["Clubs" /* Suit.Clubs */, "Diamonds" /* Suit.Diamonds */, "Hearts" /* Suit.Hearts */, "Spades" /* Suit.Spades */];
+        let suits = [Card_1.Suit.Clubs, Card_1.Suit.Diamonds, Card_1.Suit.Hearts, Card_1.Suit.Spades];
         for (let i = 0; i < 4; i++) {
-            for (let ii = 1; ii < 14; ii++) {
-                rtn.push(new Card_1.default(suits[i], Card_1.Rank[ii]));
+            for (let ii = 0; ii < 13; ii++) {
+                rtn.push(new Card_1.default(suits[i], ii));
             }
         }
         return rtn;
