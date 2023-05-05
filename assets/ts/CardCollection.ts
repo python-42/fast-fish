@@ -8,15 +8,47 @@ export default abstract class CardCollection {
         this.maxCardCount = maxCardCount;
     }
 
-    public abstract addCard(card : Card) : void
+    public addCard(card : Card) : void {
+        if(this.inCardCollection(card) || this.maxCardCount === this.getCardCount()) {
+            return;
+        }
+        this.cards.push(card);
+    }
 
-    public abstract addCards(cards : Card[]) : void
+    public addCards(newCards : Card[]) : void {
+        for (let i = 0; i < newCards.length; i++) {
+            if(! this.inCardCollection(newCards[i])) {
+                this.addCard(newCards[i]);
+            }
+        }
+    }
 
-    public abstract mergeCollections(cards : CardCollection) : void
+    public mergeCollections(newCards : CardCollection) : void {
+        this.addCards(newCards.cards);
+    }
 
-    public abstract removeCard(Card : Card) : Card
+    public removeCard(card : Card) : Card {
+        for (let i = 0; i < this.cards.length; i++) {
+            if(this.cards[i] === card) {
+                this.cards.splice(i, 1);
+                return card;
+            }
+        }
+        return null;
+    }
 
-    public abstract passCard(card : Card, target : CardCollection) : void
+    public passCard(card : Card, target : CardCollection) : void {
+        if(!this.inCardCollection(card)) {
+            return;
+        }
+        target.addCard(card);
+        this.removeCard(card);
+    }
+
+    public passCardAtIndex(index : number, target : CardCollection) : void {
+        target.addCard(this.cards[index])
+        this.cards.splice(index, 1);
+    }
 
     public getCardCount() : number {
         return this.cards.length;
