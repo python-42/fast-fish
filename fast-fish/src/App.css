@@ -2,6 +2,12 @@
   min-height: 100vh;
   font-size: calc(10px + 2vmin);
   color: white;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+}
+::placeholder {
+  color: white;
 }
 .Rules,
 .Credits {
@@ -19,6 +25,7 @@
 .Credits p {
   text-align: center;
 }
+.Credits a,
 .Credits a:visited {
   color: hotpink;
 }
@@ -33,18 +40,17 @@
   row-gap: 2vh;
   background-image: url(../public/logo512.png);
 }
-.Title #startButton {
+#startButton {
   box-shadow: 0px 5px #fff;
   color: #fff;
   background-color: #282c34;
   border-radius: 10px;
 }
-.Title #startButton:hover {
+#startButton:hover {
   background-color: #32353a;
   box-shadow: 0px 5px #fff;
-  font-style: italic;
 }
-.Title #startButton:active {
+#startButton:active {
   box-shadow: 0px 4px #fff;
   transform: translateY(5px);
 }
@@ -53,30 +59,51 @@
   min-height: 30vh;
   display: flex;
   flex-direction: row;
-  border-style: double;
+  border-style: inset;
   column-gap: 2vw;
   align-items: center;
   justify-content: center;
+  background-color: #0d6436;
+  border-color: #bc8346;
 }
 .BotHand img {
   border-style: dotted;
   border-color: red;
+  width: 120px;
 }
 .CenterBoard {
   min-height: 40vh;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #07853d;
+  border-color: #bc8346;
+  border-style: outset;
 }
 .CenterBoard .turn {
-  border-style: double;
   max-height: 100px;
   width: 100px;
   margin: 10px;
+  align-self: flex-start;
+  margin-right: auto;
+  border-color: #bc8346;
+  border-style: inset;
 }
 .CenterBoard #deckIcon {
+  width: 130px;
+  border-color: white;
+  border-style: dotted;
+}
+.CenterBoard #deckIcon:hover {
+  border-color: grey;
+}
+.CenterBoard #DrawCard {
+  min-height: 25vh;
   position: absolute;
-  margin-left: 47%;
-  padding-top: 10px;
-  width: 120px;
+  width: 160px;
+  background-color: transparent;
+  border-color: #bc8346;
+  border-style: outset;
 }
 .CenterBoard #turnIcon {
   width: 100px;
@@ -89,4 +116,29 @@
   border-style: dotted;
   border-color: green;
   transform: translateY(-4px);
+}
+.PlayerText,
+#Submit {
+  align-self: flex-end;
+  padding: 10px;
+  font-size: large;
+  background-color: transparent;
+  border-radius: 10px;
+  color: white;
+  border-color: #bc8346;
+  border-style: inset;
+}
+#Submit {
+  position: absolute;
+  left: 0;
+  color: white;
+  margin-left: 285px;
+}
+#CardSelection {
+  position: absolute;
+  right: 40vw;
+}
+#PlayerName {
+  left: 0;
+  position: absolute;
 }
