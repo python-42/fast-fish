@@ -1,9 +1,5 @@
 import "./App.css";
 
-const assignName = () => {
-  console.log("APple");
-};
-
 const CenterBoard = () => {
   return (
     <div className="CenterBoard">
@@ -25,9 +21,6 @@ const CenterBoard = () => {
         type="text"
         placeholder="Enter Bot Name: "
       />
-      <button id="Submit" type="button" onClick={assignName()}>
-        Submit
-      </button>
       <input
         id="CardSelection"
         className="PlayerText"

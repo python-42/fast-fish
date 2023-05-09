@@ -12,4 +12,8 @@ const PlayerHand = () => {
   );
 };
 
+// Put a map to connect array values to image paths
+
+const DealCards = () => {};
+
 export default PlayerHand;

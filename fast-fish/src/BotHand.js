@@ -1,20 +1,21 @@
 import "./App.css";
 
-const BotHand = (numberOfCards = 5) => {
-  // let cards = [];
-  // for (let i = 0; i < numberOfCards; i++) {
-  //   cards.push("Apple");
-  // }
-  // return cards.map((card) => <div className="BotHand">{card}</div>);
-  return (
-    <div className="BotHand">
-      <img src="./images/back.png" alt="botcard" />
-      <img src="./images/back.png" alt="botcard" />
-      <img src="./images/back.png" alt="botcard" />
-      <img src="./images/back.png" alt="botcard" />
-      <img src="./images/back.png" alt="botcard" />
-    </div>
-  );
+
+const BotHand = () => {
+  const cards = HandLength();
+  return <div className="BotHand">{cards}</div>;
+};
+
+const RemoveCard = () => {
+  
+}
+
+const HandLength = (numCards = 5) => {
+  let cards = [];
+  for (let i = 0; i < numCards; i++) {
+    cards.push(<img src="./images/back.png" alt="back of a card" />);
+  }
+  return cards;
 };
 
 export default BotHand;
