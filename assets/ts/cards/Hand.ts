@@ -16,6 +16,17 @@ export default class Hand extends CardCollection {
         return Array.from(this.cards);
     }
 
+    public indexOf(card : Card) : number {
+        if(!this.inCardCollection(card)) {
+            return -1;
+        }
+        for (let i = 0; i < this.cards.length; i++) {
+            if(card === this.cards[i]) {
+                return i;
+            }
+        }
+    }
+
     /**
      * Returns an array of Card arrays. Each sub array contains two cards whose ranks match. The array contains every matching pair in the hand. 
      * @returns An array of Card arrays
