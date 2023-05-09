@@ -142,3 +142,8 @@
   left: 0;
   position: absolute;
 }
+#BotName {
+  right: 0;
+  position: absolute;
+  align-self: flex-start;
+}
