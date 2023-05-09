@@ -36,11 +36,10 @@ export default abstract class Player {
         return false;
     }
 
-    public surrenderCards(rank : Rank, toRecieve : Player) : boolean {
+    public surrenderCards(rank : Rank, toRecieve : Player) : Card {
         if(this.hasCardOfRank(rank)) {
-            this.hand.passCardAtIndex(this.indexOfCard, toRecieve.getHand());
-            return true;
+            return this.hand.passCardAtIndex(this.indexOfCard, toRecieve.getHand());
         }
-        return false;
+        return undefined;
     }
 }

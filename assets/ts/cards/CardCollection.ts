@@ -45,9 +45,9 @@ export default abstract class CardCollection {
         this.removeCard(card);
     }
 
-    public passCardAtIndex(index : number, target : CardCollection) : void {
+    public passCardAtIndex(index : number, target : CardCollection) : Card {
         target.addCard(this.cards[index])
-        this.cards.splice(index, 1);
+        return this.cards.splice(index, 1)[0];
     }
 
     public getCardCount() : number {
