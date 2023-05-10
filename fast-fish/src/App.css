@@ -69,7 +69,10 @@
 .BotHand img {
   border-style: dotted;
   border-color: red;
-  width: 120px;
+  width: 10vw;
+}
+.BotHand img:hover {
+  transform: translateY(4px);
 }
 .CenterBoard {
   min-height: 40vh;
@@ -90,7 +93,7 @@
   border-style: inset;
 }
 .CenterBoard #deckIcon {
-  width: 130px;
+  width: 10vw;
   border-color: white;
   border-style: dotted;
 }
@@ -100,7 +103,7 @@
 .CenterBoard #DrawCard {
   min-height: 25vh;
   position: absolute;
-  width: 160px;
+  width: 13vw;
   background-color: transparent;
   border-color: #bc8346;
   border-style: outset;
@@ -111,6 +114,7 @@
 .PlayerHand img {
   border-style: dotted;
   border-color: red;
+  width: 10vw;
 }
 .PlayerHand img:hover {
   border-style: dotted;
@@ -133,10 +137,6 @@
   left: 0;
   color: white;
   margin-left: 285px;
-}
-#CardSelection {
-  position: absolute;
-  right: 40vw;
 }
 #PlayerName {
   left: 0;

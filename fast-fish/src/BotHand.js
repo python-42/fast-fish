@@ -1,19 +1,23 @@
 import "./App.css";
 
-
 const BotHand = () => {
-  const cards = HandLength();
+  const cards = HandLength(5);
   return <div className="BotHand">{cards}</div>;
 };
 
 const RemoveCard = () => {
+  let numberOfCards = HandLength();
   
-}
+};
 
-const HandLength = (numCards = 5) => {
+const HandLength = (numberOfCards) => {
   let cards = [];
-  for (let i = 0; i < numCards; i++) {
-    cards.push(<img src="./images/back.png" alt="back of a card" />);
+  for (let i = 0; i < numberOfCards; i++) {
+    cards.push(
+      <button type="button" onclick={RemoveCard}>
+        <img src="./images/back.png" alt="back of a card" />
+      </button>
+    );
   }
   return cards;
 };

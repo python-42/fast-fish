@@ -14,6 +14,8 @@ const PlayerHand = () => {
 
 // Put a map to connect array values to image paths
 
+const SelectionBox = (mousePosition) => {};
+
 const DealCards = () => {};
 
 export default PlayerHand;
