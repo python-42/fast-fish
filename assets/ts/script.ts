@@ -1,5 +1,5 @@
-import Card, { Rank, Suit } from "./Card";
-import Deck from "./Deck";
-import Hand from "./Hand";
+import Card, { Rank, Suit } from "./cards/Card";
+import Deck from "./cards/Deck";
+import Hand from "./cards/Hand";
 
 let h : Hand = new Hand();
