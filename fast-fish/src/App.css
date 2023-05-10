@@ -147,3 +147,21 @@
   position: absolute;
   align-self: flex-start;
 }
+#playerCard {
+  background-color: #0d6436;
+}
+.buttonPrompt {
+  background-color: #282c34;
+  padding: 2vh;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1vh;
+}
+.buttonPrompt button {
+  border-radius: 10px;
+  border-color: #bc8346;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+}

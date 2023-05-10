@@ -48,7 +48,8 @@ const Game = () => {
       <button
         id="startButton"
         type="button"
-        onClick={() => setVisibility(true)}>
+        onClick={() => setVisibility(true)}
+      >
         <h2 style={{ textDecorationLine: "underline" }}>
           🐟 Start Fast Fish! 🎣
         </h2>
