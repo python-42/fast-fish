@@ -1,13 +1,13 @@
 import "./App.css";
+import { useRef } from "react";
 
 const BotHand = () => {
   const cards = HandLength(5);
   return <div className="BotHand">{cards}</div>;
 };
 
-const RemoveCard = () => {
+const RemoveCard = (cardRef) => {
   let numberOfCards = HandLength();
-  
 };
 
 const HandLength = (numberOfCards) => {
