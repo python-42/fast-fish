@@ -39,7 +39,7 @@ class CardCollection {
     }
     passCardAtIndex(index, target) {
         target.addCard(this.cards[index]);
-        this.cards.splice(index, 1);
+        return this.cards.splice(index, 1)[0];
     }
     getCardCount() {
         return this.cards.length;
