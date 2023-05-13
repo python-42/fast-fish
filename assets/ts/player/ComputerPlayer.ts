@@ -47,8 +47,4 @@ export default class ComputerPlayer extends Player {
     public getPlayedCards() : Card[] {
         return this.pairs;
     }
-
-    public handLength() : number {
-        return this.hand.getCardCount();
-    }
 }
