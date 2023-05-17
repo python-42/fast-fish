@@ -71,13 +71,13 @@ const Prompt = (props) => {
 
 const Card = (props) => {
   return (
-    <button type="button" id="playerCard" onClick={() => console.log("Apple")}>
+    <button type="button" id="playerCard" onClick={props.callBackFunction}>
       <img src={cardPaths.get(props.path)} alt="Player Card" />
     </button>
   );
 };
 
-const buildPlayerHand = (callBackFunction, value) => {
+const buildPlayerHand = () => {
   let cards = [];
   const backendHand = playerBackendHand.viewCards();
   const spawnPrompt = (spawn) => {
@@ -89,7 +89,7 @@ const buildPlayerHand = (callBackFunction, value) => {
         <Card
           callBackFunction={() => {
             spawnPrompt(true);
-            callBackFunction(!value);
+            console.log(cards);
           }}
           path={backendHand[i].toString()}
         />
