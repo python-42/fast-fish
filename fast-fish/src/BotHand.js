@@ -1,25 +1,27 @@
 import "./App.css";
-import { useRef } from "react";
+import { useState } from "react";
+import { computerPlayer, computerTurn } from "./assets/js/script";
 
-const BotHand = () => {
-  const cards = HandLength(5);
-  return <div className="BotHand">{cards}</div>;
-};
+let cards = [];
+const backendHand = computerPlayer.getHand();
 
-const RemoveCard = (cardRef) => {
-  let numberOfCards = HandLength();
-};
-
-const HandLength = (numberOfCards) => {
-  let cards = [];
-  for (let i = 0; i < numberOfCards; i++) {
+const getBotHand = () => {
+  const botHandLength = backendHand.viewCards().length;
+  for (let i = 0; i < botHandLength; i++) {
     cards.push(
-      <button type="button" onclick={RemoveCard}>
+      <button type="button">
         <img src="./images/back.png" alt="back of a card" />
       </button>
     );
   }
-  return cards;
 };
 
-export default BotHand;
+const takeTurn = () => {
+  computerPlayer.takeTurn();
+};
+
+const BotHand = () => {
+  return <div className="BotHand">{cards}</div>;
+};
+
+export { BotHand, getBotHand, backendHand };

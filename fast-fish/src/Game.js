@@ -1,9 +1,13 @@
 import { useState } from "react";
 import GameBoard from "./GameBoard";
+import { getBotHand, backendHand } from "./BotHand";
+import { fillHands } from "./CenterBoard";
+import { playerBackendHand, buildPlayerHand } from "./PlayerHand";
 import "./App.css";
 
 const Game = () => {
   const [visiblity, setVisibility] = useState(false);
+
   if (visiblity) {
     return (
       <div>
@@ -48,7 +52,12 @@ const Game = () => {
       <button
         id="startButton"
         type="button"
-        onClick={() => setVisibility(true)}
+        onClick={() => {
+          setVisibility(true);
+          fillHands(backendHand, 5);
+          fillHands(playerBackendHand, 5);
+          getBotHand();
+        }}
       >
         <h2 style={{ textDecorationLine: "underline" }}>
           🐟 Start Fast Fish! 🎣

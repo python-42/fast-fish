@@ -1,4 +1,5 @@
 import "./App.css";
+import { deck } from "./assets/js/script";
 
 const PlayerName = () => {
   return (
@@ -30,6 +31,13 @@ const TurnIndicator = () => {
   );
 };
 
+const fillHands = (hand, numCards) => {
+  for (let i = 0; i < numCards; i++) {
+    deck.passCardAtIndex(0, hand);
+    console.log(hand);
+  }
+};
+
 const Deck = () => {
   return (
     <button type="button" id="DrawCard">
@@ -49,4 +57,4 @@ const CenterBoard = () => {
   );
 };
 
-export default CenterBoard;
+export { CenterBoard, fillHands };

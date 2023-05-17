@@ -1,32 +1,10 @@
 import "./App.css";
-import { useState, useRef } from "react";
+import { useState } from "react";
+import { humanPlayer } from "./assets/js/script";
 
 const cardPaths = new Map();
-// const Rank = [
-//   "Ace",
-//   "Two",
-//   "Three",
-//   "Four",
-//   "Five",
-//   "Six",
-//   "Seven",
-//   "Eight",
-//   "Nine",
-//   "Ten",
-//   "Jack",
-//   "Queen",
-//   "King",
-// ];
-// const Suit = ["Clubs", "Diamonds", "Spades"];
+const playerBackendHand = humanPlayer.getHand();
 
-// for (let i = 0; i < Suit.length; i++) {
-//   for (let j = 0; i < Rank.length; j++) {
-//     cardPaths.set(
-//       `${Suit[i]} of ${Rank[j]}`,
-//       `./images/${Suit[i]}_of_${Rank[j]}`
-//     );
-//   }
-// }
 cardPaths.set("Ace of Spades", "./images/Ace_of_Spades.jpg");
 cardPaths.set("Two of Spades", "./images/Two_of_Spades.jpg");
 cardPaths.set("Three of Spades", "./images/Three_of_Spades.jpg");
@@ -80,54 +58,49 @@ cardPaths.set("Jack of Hearts", "./images/Jack_of_Hearts.jpg");
 cardPaths.set("Queen of Hearts", "./images/Queen_of_Hearts.jpg");
 cardPaths.set("King of Hearts", "./images/King_of_Hearts.jpg");
 
-const getBackendHand = () => {
-  const cards = [
-    "Ace of Spades",
-    "Two of Diamonds",
-    "Eight of Clubs",
-    "King of Hearts",
-    "Queen of Diamonds",
-  ];
+const Prompt = (props) => {
+  return (
+    <div className="buttonPrompt">
+      <button type="button">Ask</button>
+      <button type="button" onClick={props.callBackFunction}>
+        Continue
+      </button>
+    </div>
+  );
+};
+
+const Card = (props) => {
+  return (
+    <button type="button" id="playerCard" onClick={() => console.log("Apple")}>
+      <img src={cardPaths.get(props.path)} alt="Player Card" />
+    </button>
+  );
+};
+
+const buildPlayerHand = (callBackFunction, value) => {
+  let cards = [];
+  const backendHand = playerBackendHand.viewCards();
+  const spawnPrompt = (spawn) => {
+    spawn ? cards.splice(0, 0, <Prompt />) : cards.splice(0, 1);
+  };
+  for (let i = 0; i < backendHand.length; i++) {
+    cards.push(
+      <div className="playerCard">
+        <Card
+          callBackFunction={() => {
+            spawnPrompt(true);
+            callBackFunction(!value);
+          }}
+          path={backendHand[i].toString()}
+        />
+      </div>
+    );
+  }
   return cards;
 };
 
 const PlayerHand = () => {
-  // Put a map to connect array values to image paths
-  const [prompt, spawnPrompt] = useState(false);
-  const HandConstructor = (numCards) => {
-    const cardArray = getBackendHand();
-    let cardImages = [];
-    for (let i = 0; i < numCards; i++) {
-      cardImages.push(
-        <div className="playerCard">
-          <button
-            type="button"
-            id="playerCard"
-            onClick={() => {
-              spawnPrompt(true);
-            }}
-          >
-            <img src={cardPaths.get(cardArray[i])} alt="Player Card" />
-          </button>
-        </div>
-      );
-    }
-    return cardImages;
-  };
-  if (prompt) {
-    return (
-      <div className="PlayerHand">
-        <div className="buttonPrompt">
-          <button type="button">Ask</button>
-          <button type="button" onClick={() => spawnPrompt(false)}>
-            Continue
-          </button>
-        </div>
-        {HandConstructor(5)}
-      </div>
-    );
-  }
-  return <div className="PlayerHand">{HandConstructor(5)}</div>;
+  return <div className="PlayerHand">{buildPlayerHand()}</div>;
 };
 
-export default PlayerHand;
+export { PlayerHand, playerBackendHand, buildPlayerHand };

@@ -149,6 +149,7 @@
 }
 #playerCard {
   background-color: #0d6436;
+  overflow: scroll;
 }
 .buttonPrompt {
   background-color: #282c34;

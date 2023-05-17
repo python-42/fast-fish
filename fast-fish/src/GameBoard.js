@@ -1,6 +1,6 @@
-import PlayerHand from "./PlayerHand";
-import CenterBoard from "./CenterBoard";
-import BotHand from "./BotHand";
+import { PlayerHand } from "./PlayerHand";
+import { CenterBoard } from "./CenterBoard";
+import { BotHand } from "./BotHand";
 import "./App.css";
 
 const GameBoard = () => {
