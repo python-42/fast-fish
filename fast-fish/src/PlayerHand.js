@@ -4,6 +4,7 @@ import { humanPlayer } from "./assets/js/script";
 
 const cardPaths = new Map();
 const playerBackendHand = humanPlayer.getHand();
+let nextId = 0;
 
 cardPaths.set("Ace of Spades", "./images/Ace_of_Spades.jpg");
 cardPaths.set("Two of Spades", "./images/Two_of_Spades.jpg");
@@ -58,41 +59,20 @@ cardPaths.set("Jack of Hearts", "./images/Jack_of_Hearts.jpg");
 cardPaths.set("Queen of Hearts", "./images/Queen_of_Hearts.jpg");
 cardPaths.set("King of Hearts", "./images/King_of_Hearts.jpg");
 
-const Prompt = (props) => {
-  return (
-    <div className="buttonPrompt">
-      <button type="button">Ask</button>
-      <button type="button" onClick={props.callBackFunction}>
-        Continue
-      </button>
-    </div>
-  );
-};
 
 const Card = (props) => {
   return (
-    <button type="button" id="playerCard" onClick={props.callBackFunction}>
-      <img src={cardPaths.get(props.path)} alt="Player Card" />
-    </button>
+    <img src={cardPaths.get(props.path)} alt="Player Card" />
   );
 };
 
 const buildPlayerHand = () => {
   let cards = [];
   const backendHand = playerBackendHand.viewCards();
-  const spawnPrompt = (spawn) => {
-    spawn ? cards.splice(0, 0, <Prompt />) : cards.splice(0, 1);
-  };
   for (let i = 0; i < backendHand.length; i++) {
     cards.push(
       <div className="playerCard">
-        <Card
-          callBackFunction={() => {
-            spawnPrompt(true);
-            console.log(cards);
-          }}
-          path={backendHand[i].toString()}
-        />
+        <Card path={backendHand[i].toString()}/>
       </div>
     );
   }
@@ -100,7 +80,40 @@ const buildPlayerHand = () => {
 };
 
 const PlayerHand = () => {
-  return <div className="PlayerHand">{buildPlayerHand()}</div>;
+  const [cards, setCards] = useState(buildPlayerHand());
+  const [prompt, spawnPrompt] = useState(false);
+  const [button, setButton] = useState([])
+  const removeCard = (itemId) => {
+    cards.filter(card => (card !== itemId));
+  }
+  if(prompt){
+    return(
+      <div className="PlayerHand"> 
+        <div className="buttonPrompt">
+          <button type="button" onClick={() => {
+            playerBackendHand.sortHand();
+            setCards(buildPlayerHand());
+            }}>Ask</button>
+          <button type="button" onClick={() => spawnPrompt(false)}>
+            Continue
+          </button>
+        </div> 
+        {cards.map(card => (
+          <button type="button" id="playerCard" key={nextId++}>
+            {card}
+          </button>))}
+      </div>
+    );
+  }else{
+  return (
+    <div className="PlayerHand">
+      {cards.map(card => (
+        <button type="button" id="playerCard" onClick={() => spawnPrompt(true)} key={nextId++}>
+          {card}
+        </button>))}
+    </div>
+  );
+      }
 };
 
-export { PlayerHand, playerBackendHand, buildPlayerHand };
+export { PlayerHand, playerBackendHand };
