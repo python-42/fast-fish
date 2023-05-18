@@ -1,6 +1,5 @@
 import { useState } from "react";
-import GameBoard from "./GameBoard";
-import { playerHand, botHand, fillHands } from "./Hands";
+import { playerHand, botHand, fillHands, GameBoard } from "./GameBoard";
 import "./App.css";
 
 const Game = () => {
@@ -18,14 +17,12 @@ const Game = () => {
       <div className="Rules">
         <h3>Rules of Go Fish!</h3>
         <hr />
-        <ul>
-          <li>Each player begins the game with five cards in their hand.</li>
-          <li>You match two cards of the same value to get a "book."</li>
-          <li>
-            If the player does not have the card, you draw one card and pass.
-          </li>
-          <li>The player with the most books wins!</li>
-        </ul>
+        <p>
+          Each player begins the game with five cards in their hand. You match
+          two cards of the same value to get a "book." If the player does not
+          have the card, you draw one card and pass. The player with the most
+          books wins!
+        </p>
       </div>
       <div className="Credits">
         <p>

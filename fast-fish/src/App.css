@@ -12,7 +12,7 @@
 .Rules,
 .Credits {
   border-style: double;
-  min-width: 45vw;
+  width: 47vw;
   background-color: #282c34;
   border-radius: 10px;
 }
@@ -24,6 +24,12 @@
 .Rules h3,
 .Credits p {
   text-align: center;
+}
+.Rules p {
+  overflow: scroll;
+  min-width: 45vw;
+  text-indent: 20px;
+  padding-left: 5px;
 }
 .Credits a,
 .Credits a:visited {
@@ -174,6 +180,10 @@
 }
 .popup img {
   border-radius: 30px;
+}
+.popup button {
+  background-color: transparent;
+  border: transparent;
 }
 .assorted {
   display: flex;

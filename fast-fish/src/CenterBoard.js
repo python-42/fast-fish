@@ -11,10 +11,12 @@ const PlayerName = () => {
   );
 };
 
-const GoFish = () => {
+const GoFish = (props) => {
   return (
     <div className="popup">
-      <img src="./images/go-fish.png" alt="go fish logo" />
+      <button type="button" onClick={() => props.callBackFunction()}>
+        <img src="./images/go-fish.png" alt="go fish logo" />
+      </button>
     </div>
   );
 };
@@ -31,13 +33,13 @@ const BotName = () => {
 };
 
 const TurnIndicator = (props) => {
-  if (props.turn) {
+  if (props.turn === true) {
     return (
       <div className="turn">
         <img id="turnIcon" src="./images/bot_turn.png" alt="bot icon" />
       </div>
     );
-  } else if (!props.turn) {
+  } else if (props.turn === false) {
     return (
       <div className="turn">
         <img id="turnIcon" src="./images/player_turn.png" alt="player icon" />
@@ -48,10 +50,14 @@ const TurnIndicator = (props) => {
 
 const Deck = (props) => {
   return (
-    <button type="button" id="DrawCard" onClick={() => props.callBackFunction}>
+    <button
+      type="button"
+      id="DrawCard"
+      onClick={() => props.callBackFunction()}
+    >
       <img id="deckIcon" src="./images/back.png" alt="Deck Icon" />
     </button>
   );
 };
 
-export { Deck, PlayerName, TurnIndicator, BotName };
+export { Deck, PlayerName, TurnIndicator, BotName, GoFish };
