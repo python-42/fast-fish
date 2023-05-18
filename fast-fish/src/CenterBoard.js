@@ -11,6 +11,26 @@ const PlayerName = () => {
   );
 };
 
+const WinGame = (props) => {
+  if(props.winner === "Bot"){
+    return(
+    <div className="winMessage">
+      <button type="button" onClick={() => window.location.reload()}>
+        <img src="./images/you_lose.jpg" alt="lose message" />
+      </button>
+    </div>
+  );
+  }else{
+    return(
+    <div className="winMessage">
+      <button type="button" onClick={() => window.location.reload()}>
+        <img src="./images/you_win.png" alt="win message" />
+      </button>
+    </div>
+  );
+  }
+};
+
 const GoFish = (props) => {
   return (
     <div className="popup">
@@ -60,4 +80,4 @@ const Deck = (props) => {
   );
 };
 
-export { Deck, PlayerName, TurnIndicator, BotName, GoFish };
+export { Deck, PlayerName, TurnIndicator, BotName, GoFish, WinGame};

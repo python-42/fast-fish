@@ -7,6 +7,7 @@ import {
   BotName,
   TurnIndicator,
   GoFish,
+  WinGame
 } from "./CenterBoard";
 
 const cardPaths = new Map();
@@ -72,6 +73,15 @@ const sleep = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
+const botHasCard = (targetValue) => {
+  for (let i = 0; i < botHand.getCardCount(); i++) {
+    if (botHand.viewCards()[i].getRank() === targetValue) {
+      return true;
+    }
+  }
+  return false;
+};
+
 const fillHands = (hand, numCards) => {
   for (let i = 0; i < numCards; i++) {
     deck.passCardAtIndex(0, hand);
@@ -117,32 +127,31 @@ const drawCard = (turn) => {
   }
 };
 
-const botHasCard = (targetValue) => {
-  for (let i = 0; i < botHand.getCardCount(); i++) {
-    if (botHand.viewCards()[i].getRank() === targetValue) {
-      return true;
-    }
-  }
-  return false;
-};
+// const winCondition = () => {
+//   if(){
 
-const removePairs = () => {};
+//   }else{
+
+//   }
+// };
 
 const scorePoints = () => {
   let points = 0;
-
+  const pointsArray = playerHand.getPairs();
+  for (let i = 0; i < pointsArray.length; i++) {
+    playerHand.removeCard(pointsArray[i]);
+  }
+  points = pointsArray.length / 2;
   return points;
 };
 
 const askForCard = (cardValue, callBackFunction) => {
-  console.log(`The card's rank is: ${cardValue + 1}`);
   if (botHasCard(cardValue)) {
     let botIndex = botHand
       .viewCards()
       .findIndex((card) => card.getRank() === cardValue);
     botHand.passCardAtIndex(botIndex, playerHand);
   } else {
-    //Call Go Fish Function
     callBackFunction();
   }
 };
@@ -153,8 +162,71 @@ const GameBoard = (props) => {
   const [selectedCard, cardSelector] = useState([]);
   const [botcards, setBotCards] = useState(getBotHand());
   const [score, setScore] = useState(0);
-  const [turn, endTurn] = useState(true);
+  const [turn, endTurn] = useState(false);
   const [fish, goFish] = useState(false);
+  const [winner, pickWinner] = useState();
+  const [win, winGame] = useState(true);
+  if(win){
+    return (
+      <div className="GameBoard">
+        <div className="BotHand">
+          {botcards.map((card) => (
+            <button type="button">{card}</button>
+          ))}
+        </div>
+        <div className="CenterBoard">
+          <Deck
+            callBackFunction={() => {
+              drawCard(turn);
+              endTurn(!turn);
+              setCards(getPlayerHand());
+              setBotCards(getBotHand());
+            }}
+          />
+          <PlayerName />
+          <WinGame winner="Bot"/>
+          <TurnIndicator turn={turn} />
+          <BotName />
+        </div>
+        <div className="PlayerHand">
+          {cards.map((card) => (
+            <button
+              type="button"
+              id="playerCard"
+              key={nextId++}
+              onClick={() => {
+                spawnPrompt(true);
+                cardSelector(card);
+              }}
+            >
+              {card}
+            </button>
+          ))}
+          <div className="assorted">
+            <button
+              type="button"
+              onClick={() => {
+                setScore(score + scorePoints());
+                setCards(getPlayerHand());
+              }}
+            >
+              Score!
+            </button>
+            <div className="score">{score}</div>
+            <button
+              type="button"
+              onClick={() => {
+                playerHand.sortHand();
+                setCards(getPlayerHand());
+              }}
+            >
+              Sort!
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
   if (prompt) {
     return (
       <div className="GameBoard">
@@ -247,7 +319,10 @@ const GameBoard = (props) => {
           <div className="assorted">
             <button
               type="button"
-              onClick={() => setScore(score + scorePoints())}
+              onClick={() => {
+                setScore(score + scorePoints());
+                setCards(getPlayerHand());
+              }}
             >
               Score!
             </button>
@@ -303,7 +378,10 @@ const GameBoard = (props) => {
           <div className="assorted">
             <button
               type="button"
-              onClick={() => setScore(score + scorePoints())}
+              onClick={() => {
+                setScore(score + scorePoints());
+                setCards(getPlayerHand());
+              }}
             >
               Score!
             </button>
@@ -312,7 +390,7 @@ const GameBoard = (props) => {
               type="button"
               onClick={() => {
                 playerHand.sortHand();
-                setCards(getPlayerHand());
+                setCards(getPlayerHand(false));
               }}
             >
               Sort!
