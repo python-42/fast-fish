@@ -166,3 +166,36 @@
   color: white;
   font-weight: bold;
 }
+.popup {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+}
+.popup img {
+  border-radius: 30px;
+}
+.assorted {
+  display: flex;
+  position: static;
+  flex-direction: column;
+  justify-content: end;
+  padding: 2vh;
+  background-color: #282c34;
+  border-radius: 10px;
+  row-gap: 1vh;
+}
+.assorted button {
+  border-radius: 10px;
+  border-color: #bc8346;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+}
+.score {
+  align-self: center;
+  color: white;
+  border-color: #bc8346;
+  border-style: inset;
+  padding: 1vh;
+}

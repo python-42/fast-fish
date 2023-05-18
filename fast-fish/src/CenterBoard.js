@@ -1,5 +1,4 @@
 import "./App.css";
-import { deck } from "./assets/js/script";
 
 const PlayerName = () => {
   return (
@@ -9,6 +8,14 @@ const PlayerName = () => {
       type="text"
       placeholder="Enter Player Name: "
     />
+  );
+};
+
+const GoFish = () => {
+  return (
+    <div className="popup">
+      <img src="./images/go-fish.png" alt="go fish logo" />
+    </div>
   );
 };
 
@@ -23,38 +30,28 @@ const BotName = () => {
   );
 };
 
-const TurnIndicator = () => {
-  return (
-    <div className="turn">
-      <img id="turnIcon" src="./images/bot_turn.png" alt="bot icon" />
-    </div>
-  );
-};
-
-const fillHands = (hand, numCards) => {
-  for (let i = 0; i < numCards; i++) {
-    deck.passCardAtIndex(0, hand);
-    console.log(hand);
+const TurnIndicator = (props) => {
+  if (props.turn) {
+    return (
+      <div className="turn">
+        <img id="turnIcon" src="./images/bot_turn.png" alt="bot icon" />
+      </div>
+    );
+  } else if (!props.turn) {
+    return (
+      <div className="turn">
+        <img id="turnIcon" src="./images/player_turn.png" alt="player icon" />
+      </div>
+    );
   }
 };
 
-const Deck = () => {
+const Deck = (props) => {
   return (
-    <button type="button" id="DrawCard">
+    <button type="button" id="DrawCard" onClick={() => props.callBackFunction}>
       <img id="deckIcon" src="./images/back.png" alt="Deck Icon" />
     </button>
   );
 };
 
-const CenterBoard = () => {
-  return (
-    <div className="CenterBoard">
-      <Deck />
-      <PlayerName />
-      <TurnIndicator />
-      <BotName />
-    </div>
-  );
-};
-
-export { CenterBoard, fillHands };
+export { Deck, PlayerName, TurnIndicator, BotName };

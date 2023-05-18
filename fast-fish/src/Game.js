@@ -1,8 +1,6 @@
 import { useState } from "react";
 import GameBoard from "./GameBoard";
-import { getBotHand, backendHand } from "./BotHand";
-import { fillHands } from "./CenterBoard";
-import { playerBackendHand, buildPlayerHand } from "./PlayerHand";
+import { playerHand, botHand, fillHands } from "./Hands";
 import "./App.css";
 
 const Game = () => {
@@ -54,9 +52,8 @@ const Game = () => {
         type="button"
         onClick={() => {
           setVisibility(true);
-          fillHands(backendHand, 5);
-          fillHands(playerBackendHand, 5);
-          getBotHand();
+          fillHands(botHand, 5);
+          fillHands(playerHand, 5);
         }}
       >
         <h2 style={{ textDecorationLine: "underline" }}>

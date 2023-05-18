@@ -1,14 +1,13 @@
-import { PlayerHand } from "./PlayerHand";
-import { CenterBoard } from "./CenterBoard";
-import { BotHand } from "./BotHand";
+import { Hand } from "./Hands";
+import { CenterBoard } from "./Hands";
 import "./App.css";
 
 const GameBoard = () => {
   return (
     <div className="GameBoard">
-      <BotHand />
-      <CenterBoard />
-      <PlayerHand />
+      <Hand type="Bot" />
+      <Hand type="CenterBoard" />
+      <Hand type="Player" />
     </div>
   );
 };
