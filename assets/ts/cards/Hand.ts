@@ -56,7 +56,7 @@ export default class Hand extends CardCollection {
         let workspace: Card[] = this.viewCards();
 
         while (workspace.length > 0) {
-            if (workspace[0].getRank() === workspace[1].getRank()) {
+            if (workspace.length > 1 && workspace[0].getRank() === workspace[1].getRank()) {
                 rtn.push(workspace[0]);
                 rtn.push(workspace[1]);
                 workspace.splice(0, 2);
