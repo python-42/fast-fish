@@ -2,6 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Player_1 = require("./Player");
 class ComputerPlayer extends Player_1.default {
+    constructor(deck, other) {
+        super(deck);
+        this.other = other;
+    }
     /**
      * @returns true if the method should be called again to allow the computer to continue its turn sequence
      */

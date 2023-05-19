@@ -4,5 +4,5 @@ import HumanPlayer from "./player/HumanPlayer";
 
 export const deck : Deck = new Deck();
 export const humanPlayer : HumanPlayer = new HumanPlayer(deck);
-export const computerPlayer : ComputerPlayer = new ComputerPlayer(deck);
+export const computerPlayer : ComputerPlayer = new ComputerPlayer(deck, humanPlayer);
 export let computerTurn : boolean = true;

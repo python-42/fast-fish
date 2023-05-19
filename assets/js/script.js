@@ -6,5 +6,5 @@ const ComputerPlayer_1 = require("./player/ComputerPlayer");
 const HumanPlayer_1 = require("./player/HumanPlayer");
 exports.deck = new Deck_1.default();
 exports.humanPlayer = new HumanPlayer_1.default(exports.deck);
-exports.computerPlayer = new ComputerPlayer_1.default(exports.deck);
+exports.computerPlayer = new ComputerPlayer_1.default(exports.deck, exports.humanPlayer);
 exports.computerTurn = true;

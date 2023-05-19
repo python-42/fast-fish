@@ -8,6 +8,11 @@ export default class ComputerPlayer extends Player {
     private other : Player;
     private requestedCard : Card;
 
+    public constructor(deck : Deck, other : Player) {
+        super(deck);
+        this.other = other;
+    }
+
     /**
      * @returns true if the method should be called again to allow the computer to continue its turn sequence
      */
