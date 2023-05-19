@@ -78,6 +78,15 @@ const botHasCard = (targetValue) => {
   return false;
 };
 
+const playerHasCard = (targetValue) => {
+  for (let i = 0; i < playerHand.getCardCount(); i++) {
+    if (playerHand.viewCards()[i].getRank() === targetValue) {
+      return true;
+    }
+  }
+  return false;
+};
+
 const fillHands = (hand, numCards) => {
   for (let i = 0; i < numCards; i++) {
     deck.passCardAtIndex(0, hand);
@@ -149,7 +158,7 @@ const scorePoints = () => {
   return points;
 };
 
-const askForCard = (cardValue, callBackFunction) => {
+const askBotForCard = (cardValue, callBackFunction) => {
   if (botHasCard(cardValue)) {
     let botIndex = botHand
       .viewCards()
@@ -160,13 +169,26 @@ const askForCard = (cardValue, callBackFunction) => {
   }
 };
 
+const askPlayerForCard = (cardValue) => {
+  if (playerHasCard(cardValue)) {
+    let playerIndex = playerHand
+      .viewCards()
+      .findIndex((card) => card.getRank() === cardValue);
+    playerHand.passCardAtIndex(playerIndex, botHand);
+    console.log("Wee I took a card");
+    return false;
+  } else {
+    console.log("Wee I drew a card");
+    return true;
+  }
+};
+
 const botTurn = () => {
   let remainingCards = botHand.viewCards();
-  let c = humanPlayer.surrenderCards(
-    remainingCards[Math.floor(Math.random() * remainingCards.length)].getRank(),
-    computerPlayer
+  let c = askPlayerForCard(
+    remainingCards[Math.floor(Math.random() * remainingCards.length)].getRank()
   );
-  if (c === undefined) {
+  if (c) {
     deck.passCardAtIndex(0, botHand);
   }
 };
@@ -286,7 +308,7 @@ const GameBoard = (props) => {
             <button
               type="button"
               onClick={() => {
-                askForCard(
+                askBotForCard(
                   playerHand
                     .viewCards()
                     [
