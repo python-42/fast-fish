@@ -12,22 +12,22 @@ const PlayerName = () => {
 };
 
 const WinGame = (props) => {
-  if(props.winner === "Bot"){
-    return(
-    <div className="winMessage">
-      <button type="button" onClick={() => window.location.reload()}>
-        <img src="./images/you_lose.jpg" alt="lose message" />
-      </button>
-    </div>
-  );
-  }else{
-    return(
-    <div className="winMessage">
-      <button type="button" onClick={() => window.location.reload()}>
-        <img src="./images/you_win.png" alt="win message" />
-      </button>
-    </div>
-  );
+  if (props.winner === "Bot") {
+    return (
+      <div className="winMessage">
+        <button type="button" onClick={() => window.location.reload()}>
+          <img src="./images/you_lose.png" alt="lose message" />
+        </button>
+      </div>
+    );
+  } else if (props.winner === "Player") {
+    return (
+      <div className="winMessage">
+        <button type="button" onClick={() => window.location.reload()}>
+          <img src="./images/you_win.png" alt="win message" />
+        </button>
+      </div>
+    );
   }
 };
 
@@ -69,15 +69,28 @@ const TurnIndicator = (props) => {
 };
 
 const Deck = (props) => {
-  return (
-    <button
-      type="button"
-      id="DrawCard"
-      onClick={() => props.callBackFunction()}
-    >
-      <img id="deckIcon" src="./images/back.png" alt="Deck Icon" />
-    </button>
-  );
+  if (props.draw) {
+    return (
+      <button
+        type="button"
+        id="DrawCard"
+        onClick={() => props.callBackFunction()}
+      >
+        <img id="deckIcon" src="./images/back.png" alt="Deck Icon" />
+      </button>
+    );
+  } else {
+    return (
+      <button
+        type="button"
+        id="DrawCard"
+        onClick={() => props.callBackFunction()}
+        disabled
+      >
+        <img id="deckIcon" src="./images/back.png" alt="Deck Icon" />
+      </button>
+    );
+  }
 };
 
-export { Deck, PlayerName, TurnIndicator, BotName, GoFish, WinGame};
+export { Deck, PlayerName, TurnIndicator, BotName, GoFish, WinGame };

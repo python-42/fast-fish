@@ -7,7 +7,7 @@ import {
   BotName,
   TurnIndicator,
   GoFish,
-  WinGame
+  WinGame,
 } from "./CenterBoard";
 
 const cardPaths = new Map();
@@ -69,10 +69,6 @@ cardPaths.set("Queen of Hearts", "./images/Queen_of_Hearts.jpg");
 cardPaths.set("King of Hearts", "./images/King_of_Hearts.jpg");
 cardPaths.set("Back", "./images/back.png");
 
-const sleep = (ms) => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-};
-
 const botHasCard = (targetValue) => {
   for (let i = 0; i < botHand.getCardCount(); i++) {
     if (botHand.viewCards()[i].getRank() === targetValue) {
@@ -127,13 +123,21 @@ const drawCard = (turn) => {
   }
 };
 
-// const winCondition = () => {
-//   if(){
+const winCondition = (playerScore, botScore) => {
+  if (playerHand.viewCards().length < 1 || botHand.viewCards().length < 1) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
-//   }else{
-
-//   }
-// };
+const winSelector = (turn, callBackFunction) => {
+  if (turn) {
+    return "Bot";
+  } else {
+    return "Player";
+  }
+};
 
 const scorePoints = () => {
   let points = 0;
@@ -156,20 +160,46 @@ const askForCard = (cardValue, callBackFunction) => {
   }
 };
 
+const botTurn = () => {
+  let remainingCards = botHand.viewCards();
+  let c = humanPlayer.surrenderCards(
+    remainingCards[Math.floor(Math.random() * remainingCards.length)].getRank(),
+    computerPlayer
+  );
+  if (c === undefined) {
+    deck.passCardAtIndex(0, botHand);
+  }
+};
+
+const botPoints = () => {
+  let points = 0;
+  const pointsArray = botHand.getPairs();
+  for (let i = 0; i < pointsArray.length; i++) {
+    botHand.removeCard(pointsArray[i]);
+  }
+  points = pointsArray.length / 2;
+  return points;
+};
+
 const GameBoard = (props) => {
   const [cards, setCards] = useState(getPlayerHand());
   const [prompt, spawnPrompt] = useState(false);
   const [selectedCard, cardSelector] = useState([]);
   const [botcards, setBotCards] = useState(getBotHand());
   const [score, setScore] = useState(0);
+  const [botScore, setBotScore] = useState(0);
   const [turn, endTurn] = useState(false);
   const [fish, goFish] = useState(false);
-  const [winner, pickWinner] = useState();
-  const [win, winGame] = useState(true);
-  if(win){
+  const [winner, pickWinner] = useState("");
+  const [win, winGame] = useState(false);
+  const [draw, allowDraw] = useState(false);
+  if (win) {
     return (
       <div className="GameBoard">
         <div className="BotHand">
+          <div className="assorted">
+            <div className="score">{botScore}</div>
+          </div>
           {botcards.map((card) => (
             <button type="button">{card}</button>
           ))}
@@ -184,7 +214,7 @@ const GameBoard = (props) => {
             }}
           />
           <PlayerName />
-          <WinGame winner="Bot"/>
+          <WinGame winner={winner} />
           <TurnIndicator turn={turn} />
           <BotName />
         </div>
@@ -231,6 +261,9 @@ const GameBoard = (props) => {
     return (
       <div className="GameBoard">
         <div className="BotHand">
+          <div className="assorted">
+            <div className="score">{botScore}</div>
+          </div>
           {botcards.map((card) => (
             <button type="button">{card}</button>
           ))}
@@ -284,6 +317,9 @@ const GameBoard = (props) => {
     return (
       <div className="GameBoard">
         <div className="BotHand">
+          <div className="assorted">
+            <div className="score">{botScore}</div>
+          </div>
           {botcards.map((card) => (
             <button type="button">{card}</button>
           ))}
@@ -296,9 +332,15 @@ const GameBoard = (props) => {
               setCards(getPlayerHand());
               setBotCards(getBotHand());
             }}
+            draw={draw}
           />
           <PlayerName />
-          <GoFish callBackFunction={() => goFish(false)} />
+          <GoFish
+            callBackFunction={() => {
+              goFish(false);
+              allowDraw(true);
+            }}
+          />
           <TurnIndicator turn={turn} />
           <BotName />
         </div>
@@ -321,6 +363,8 @@ const GameBoard = (props) => {
               type="button"
               onClick={() => {
                 setScore(score + scorePoints());
+                pickWinner(winSelector(turn));
+                winGame(winCondition(playerHand.viewCards(), score, botScore));
                 setCards(getPlayerHand());
               }}
             >
@@ -340,10 +384,92 @@ const GameBoard = (props) => {
         </div>
       </div>
     );
+  }
+  if (turn) {
+    return (
+      <div className="GameBoard">
+        <div className="BotHand">
+          <div className="assorted">
+            <div className="score">{botScore}</div>
+          </div>
+          {botcards.map((card) => (
+            <button type="button">{card}</button>
+          ))}
+        </div>
+        <div className="CenterBoard">
+          <Deck
+            callBackFunction={() => {
+              drawCard(turn);
+              allowDraw(false);
+              setCards(getPlayerHand());
+              setBotCards(getBotHand());
+            }}
+            draw={draw}
+          />
+          <PlayerName />
+          <TurnIndicator turn={turn} />
+          <BotName />
+        </div>
+        <div className="PlayerHand">
+          {cards.map((card) => (
+            <button
+              type="button"
+              id="playerCard"
+              key={nextId++}
+              disabled
+              onClick={() => {
+                spawnPrompt(true);
+                cardSelector(card);
+              }}
+            >
+              {card}
+            </button>
+          ))}
+          <div className="assorted">
+            <button
+              type="button"
+              onClick={() => {
+                setScore(score + scorePoints());
+                pickWinner(winSelector(turn));
+                winGame(winCondition(playerHand.viewCards(), score, botScore));
+                setCards(getPlayerHand());
+              }}
+            >
+              Score!
+            </button>
+            <div className="score">{score}</div>
+            <button
+              type="button"
+              onClick={() => {
+                playerHand.sortHand();
+                setCards(getPlayerHand(false));
+              }}
+            >
+              Sort!
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                endTurn(!turn);
+                allowDraw(true);
+                setBotScore(botScore + botPoints());
+                setCards(getPlayerHand());
+                setBotCards(getBotHand());
+              }}
+            >
+              End Bot Turn!
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   } else {
     return (
       <div className="GameBoard">
         <div className="BotHand">
+          <div className="assorted">
+            <div className="score">{botScore}</div>
+          </div>
           {botcards.map((card) => (
             <button type="button">{card}</button>
           ))}
@@ -353,9 +479,13 @@ const GameBoard = (props) => {
             callBackFunction={() => {
               drawCard(turn);
               endTurn(!turn);
+              allowDraw(false);
+              botTurn();
+              setBotScore(botScore + botPoints());
               setCards(getPlayerHand());
               setBotCards(getBotHand());
             }}
+            draw={draw}
           />
           <PlayerName />
           <TurnIndicator turn={turn} />
@@ -380,6 +510,8 @@ const GameBoard = (props) => {
               type="button"
               onClick={() => {
                 setScore(score + scorePoints());
+                pickWinner(winSelector(turn));
+                winGame(winCondition(playerHand.viewCards(), score, botScore));
                 setCards(getPlayerHand());
               }}
             >
