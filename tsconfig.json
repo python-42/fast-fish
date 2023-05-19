@@ -1,7 +1,7 @@
 {
-    "compilerOptions" : {
-        "target" : "es6",
-        "module" : "commonjs",
-        "outDir" : "./assets/js/"
-    }
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "fast-fish/src/assets/js"
+  }
 }

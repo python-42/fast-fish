@@ -12,7 +12,7 @@
 .Rules,
 .Credits {
   border-style: double;
-  min-width: 45vw;
+  width: 47vw;
   background-color: #282c34;
   border-radius: 10px;
 }
@@ -24,6 +24,12 @@
 .Rules h3,
 .Credits p {
   text-align: center;
+}
+.Rules p {
+  overflow: scroll;
+  min-width: 45vw;
+  text-indent: 20px;
+  padding-left: 5px;
 }
 .Credits a,
 .Credits a:visited {
@@ -69,7 +75,10 @@
 .BotHand img {
   border-style: dotted;
   border-color: red;
-  width: 120px;
+  width: 10vw;
+}
+.BotHand img:hover {
+  transform: translateY(4px);
 }
 .CenterBoard {
   min-height: 40vh;
@@ -90,7 +99,7 @@
   border-style: inset;
 }
 .CenterBoard #deckIcon {
-  width: 130px;
+  width: 10vw;
   border-color: white;
   border-style: dotted;
 }
@@ -100,7 +109,7 @@
 .CenterBoard #DrawCard {
   min-height: 25vh;
   position: absolute;
-  width: 160px;
+  width: 13vw;
   background-color: transparent;
   border-color: #bc8346;
   border-style: outset;
@@ -111,6 +120,7 @@
 .PlayerHand img {
   border-style: dotted;
   border-color: red;
+  width: 10vw;
 }
 .PlayerHand img:hover {
   border-style: dotted;
@@ -134,10 +144,6 @@
   color: white;
   margin-left: 285px;
 }
-#CardSelection {
-  position: absolute;
-  right: 40vw;
-}
 #PlayerName {
   left: 0;
   position: absolute;
@@ -146,4 +152,76 @@
   right: 0;
   position: absolute;
   align-self: flex-start;
+}
+#playerCard {
+  background-color: #0d6436;
+  overflow: scroll;
+}
+.buttonPrompt {
+  background-color: #282c34;
+  padding: 2vh;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1vh;
+}
+.buttonPrompt button {
+  border-radius: 10px;
+  border-color: #bc8346;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+}
+.popup {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+}
+.popup img {
+  border-radius: 30px;
+}
+.popup button {
+  background-color: transparent;
+  border: transparent;
+}
+.assorted {
+  display: flex;
+  position: static;
+  flex-direction: column;
+  justify-content: end;
+  padding: 2vh;
+  background-color: #282c34;
+  border-radius: 10px;
+  row-gap: 1vh;
+}
+.assorted button {
+  border-radius: 10px;
+  border-color: #bc8346;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+}
+.score {
+  align-self: center;
+  color: white;
+  border-color: #bc8346;
+  border-style: inset;
+  padding: 1vh;
+  font-family: "Times New Roman", Times, serif;
+}
+.winMessage {
+  position: absolute;
+  margin-left:auto;
+  margin-right: auto;
+  border-color: transparent;
+}
+.winMessage button {
+  background-color: transparent;
+  width: 100%;
+  border-color: transparent;
+}
+.winMessage button:hover {
+  border-color: black;
+  border-radius: 10px;
 }
